@@ -28,20 +28,17 @@ add(new Label(""));
 
 add(new Label("Імя вихідного файлу"));
 
-
-	Button button = new Button("OK");
-	add(button);
-	button.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+    Button button = new Button("OK");
+    add(button);
+    button.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
 		//surname.setText("com");
 		//System.exit(0);
 	    }
 	});
-
 	setVisible(true);
 	grid1.setRows(7);
 	grid1.setColumns(4);
-
 
 	addWindowListener(new WindowAdapter(){
 	    public void windowClosing(WindowEvent e){ 
