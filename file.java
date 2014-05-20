@@ -2,43 +2,57 @@
 import java.util.Scanner;
 import java.io.File;
 
+
 import javax.swing.JOptionPane;
 
 
-public class file {
-	static String [][] m = new String [1][1255];
-	static Scanner scn;
-
-public static void main(String args[])
+public class MyFileClass 
 {
-	openFile();
+    static double[] m = new double[1255];
+    protected static int N;
+    static Scanner scn;
+
+    public static void main(String args[])
+    {
+	openFile("res/UX.txt");
 	readFile();
 	out();
-}
-
-private static void out() {
-	for(int row=0;row<m.length;row++){
-	for(int col=0;col<m[row].length;col++){
-	System.out.print(m[row][col]+ "   ");
-}
-System.out.println();
- }
-}
-		
-private static void readFile() {
-	while(scn.hasNext()){
-	for(int row=0;row<m.length;row++){
-	for(int col=0;col<m[row].length;col++){
-	m[row][col] = scn.next();
-	
     }
-   }
-  }
-}
 
-private static void openFile() {
-	try{
-	scn = new Scanner(new File("res//UX.txt"));
-	} catch(Exception e){JOptionPane.showMessageDialog(null, "Файл не найден");}
- }
+    public static void out() 
+    {
+        for(int col=0;col<N;col++){
+            System.out.print(m[col]+ "   ");
+            System.out.println();
+        }
+    }
+    public static double [] getData()
+    {
+        return m;
+    }
+
+    public static void setData(double []newM)
+    {
+        m = newM;
+        N=m.length;
+    }
+
+    public static void readFile() 
+    {
+        int col=0;
+        while(scn.hasNext() && (col<m.length)){
+            m[col] = Double.parseDouble(scn.next());
+            col++;
+        }
+        N=col;
+    }
+
+    public static void openFile(String s) 
+    {
+        try {
+            scn = new Scanner(new File(s));
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Файл не найден");
+        }
+    }
 }
