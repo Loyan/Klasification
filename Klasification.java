@@ -35,6 +35,7 @@ public class Klasification extends Frame {
 			fc.openFile(inFile.getText());
 			fc.readFile();
 			fc.out();
+			fc.writeFile(outFile.getText());
 			double [] mas = fc.getData();
 			inFile.setText(new Double(mas[3]).toString());
 			//System.exit(0);
