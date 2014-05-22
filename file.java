@@ -1,7 +1,8 @@
 //програма зчитує дані з файлу та записує ці дані в масив
 import java.util.Scanner;
 import java.io.File;
-
+import java.io.PrintWriter;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -17,6 +18,7 @@ public class MyFileClass
 	openFile("res/UX.txt");
 	readFile();
 	out();
+	writeFile("res/UX_classif.txt");
     }
 
     public static void out() 
@@ -47,6 +49,33 @@ public class MyFileClass
         N=col;
     }
 
+    public static void writeFile(String fileName) 
+    {
+	File file = new File(fileName);
+	try {
+		//проверяем, что если файл не существует то создаем его
+		if(!file.exists()){
+			file.createNewFile();
+		}
+		//PrintWriter обеспечит возможности записи в файл
+		PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+		try {
+ 			for(int col=0;col<N;col++){
+				out.print(m[col]);
+				out.println();
+			}
+		}
+		 finally {
+		            //После чего мы должны закрыть файл
+		            //Иначе файл не запишется
+		            out.close();
+		}
+	}
+	catch(IOException e) {
+	        throw new RuntimeException(e);
+	}
+    }
+
     public static void openFile(String s) 
     {
         try {
@@ -56,3 +85,4 @@ public class MyFileClass
         }
     }
 }
+
