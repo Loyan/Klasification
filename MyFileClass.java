@@ -1,13 +1,13 @@
-//програма зчитує дані з файлу та записує ці дані в масив
 import java.util.Scanner;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.lang.Math;
 
 import javax.swing.JOptionPane;
 
 
-public class MyFileClass 
+public class MyFileClass
 {
     static double[] m = new double[1255];
     protected static int N;
@@ -15,19 +15,21 @@ public class MyFileClass
 
     public static void main(String args[])
     {
+
 	openFile("res/UX.txt");
 	readFile();
 	out();
 	writeFile("res/UX_classif.txt");
+	
     }
-
-    public static void out() 
+public static void out() 
     {
-        for(int col=0;col<N;col++){
+       for(int col=0;col<N;col++){
             System.out.print(m[col]+ "   ");
             System.out.println();
         }
-    }
+   }
+ 
     public static double [] getData()
     {
         return m;
@@ -85,4 +87,3 @@ public class MyFileClass
         }
     }
 }
-
