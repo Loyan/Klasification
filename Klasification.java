@@ -6,6 +6,7 @@ public class Klasification extends Frame {
 
     protected TextField inFile;
     protected TextField outFile;
+    normalization n;
 
     public static void main (String [] argv){
 	Klasification h = new Klasification();
@@ -24,6 +25,18 @@ public class Klasification extends Frame {
 
 	Button OpenFile = new Button("Загрузити вхідний файл");
 	add(OpenFile);
+	OpenFile.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			MyFileClass fc = new MyFileClass();
+			fc.openFile(inFile.getText());
+			fc.readFile();
+			fc.out();
+			//fc.writeFile(outFile.getText());
+			double [] mas = fc.getData();
+			inFile.setText(new String("Ux.txt").toString());
+			//System.exit(0);
+		}
+	});
 
 	add(new Label(""));
     
@@ -31,13 +44,12 @@ public class Klasification extends Frame {
 	add(Klasification);
 	Klasification.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			MyFileClass fc = new MyFileClass();
-			fc.openFile(inFile.getText());
-			fc.readFile();
-			fc.out();
-			fc.writeFile(outFile.getText());
-			double [] mas = fc.getData();
-			inFile.setText(new Double(mas[3]).toString());
+			n = new normalization();
+			n.prubytkovosti();
+			n.averag();
+			n.standotkl();
+			n.interval();
+			n.klassif();
 			//System.exit(0);
 		}
 	});
@@ -51,6 +63,17 @@ public class Klasification extends Frame {
    
 	Button outFileButton = new Button("Записуємо результат у файл ");
 	add(outFileButton);
+
+	outFileButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			double [] data=n.getResultData();
+			MyFileClass fc = new MyFileClass();
+			fc.setData(data);
+			fc.writeFile(outFile.getText());
+			
+			//System.exit(0);
+		}
+	});
 
 	Button button = new Button("OK");
 	add(button);
